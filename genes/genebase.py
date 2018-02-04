@@ -5,4 +5,5 @@ class Gene:
 		
 	def get_score(self):
 		pass
+	
 		
