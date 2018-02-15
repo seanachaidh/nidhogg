@@ -1,16 +1,18 @@
+import nwriter
+
 class Perspective:
 	
-	def _dialog_filter(self, tokens):
+	def _dialog_filter(self):
 		indial = False
 		retval = []
-		for tag in myfile.postag:
+		for tag in self.myfile.postag:
 			if tag[1] == "''":
 				indial = not indial
 			elif not indial:
 				retval.append(tag)
 		return retval
 	
-	def _split_zinnen(tokens):
+	def _split_zinnen(self, tokens):
 		zinnen = []
 		current = []
 		for tok in tokens:
@@ -19,28 +21,43 @@ class Perspective:
 				current = []
 			else:
 				current.append(tok)
-	
+		return zinnen
+				
+					
 	def _calculate_zinnen(self, zinnen):
+		retval = []
 		
 		for z in zinnen:
-			toparse = list.reverse([x for x in z]) # Kan ik dit ook doen zonder de lijst om te draaien?
-			stack = list()
-			
+			first = False
 			for t in z:
-				if not stack:
-					
-				
+				if t[0] == 'I' or t[0].lower() == 'we':
+					first = True
+			retval.append((first, z)) #Geeft tuples terug
+		return retval
+			
+	def _serialize_result(self, calczinnen):
+		elems = list()
+		
+		for c in calczinnen:
+			if c[0]:
+				isi = 'ik'
+			else:
+				isi = 'hij'
+			elems.append(dict(soort = isi, text = c[1], tag = 'zin'))
+		
+		filewriter = nwriter.NidhoggWriter('perspectivetest.xml', 'generesult', elems)
+		filewriter.serialize()
 	
 	def __init__(self, myfile):
-		pass
+		self.myfile = myfile
 		
-	def get_socre(self):
-		#Verkrijgt de score dewelke de kans is dat het verhaal in de eerste persoon is.
-		eerste, tweede = 0
-		zinnen = []
+	def get_score(self):
+		# Eerst de dialogen
+		diag = self._dialog_filter()
+		zinnen = self._split_zinnen(diag)
+		czin = self._calculate_zinnen(zinnen)
 		
-		#Hoeveel van de zinnen zijn in de eerste persoon
-		# first we split it into scentences. Assuming that those end in a .
+		self._serialize_result(czin)
 		
 		
 #End of class
