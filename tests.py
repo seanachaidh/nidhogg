@@ -1,4 +1,4 @@
-import unittest, nwriter, nfile, perspective
+import unittest, nwriter, nfile, perspective, nfilters
 
 class TestFileWriter(unittest.TestCase):
 	@classmethod
@@ -19,6 +19,14 @@ class TestPerspective(unittest.TestCase):
 		
 	def test_perspective(self):
 		self._scanner.get_score()
+		
+		
+class TestFilters(unittest.TestCase):
+	
+	def test_spacefilter(self):
+		zin = 'Hello\n\ncruel\nworld'
+		newzin = nfilters.filter_spaces(zin)
+		self.assertEqual(newzin, 'Hello cruel world')
 
 
 if __name__ == '__main__':

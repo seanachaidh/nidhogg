@@ -1,4 +1,4 @@
-import nltk
+import re, nltk
 from bz2 import BZ2File
 
 def only_word(tokens):
@@ -22,7 +22,10 @@ class NidhoggFile:
 	def __init__(self, filename):
 		#First we read the file
 		with BZ2File(filename, 'r') as myfile:
-			self.data = myfile.read().decode('utf-8')
+			tmpdat = myfile.read().decode('utf-8')
+			tmpdat = tmpdat.replace('\r\n', '\n')
+			#~ self.data = re.sub('[“”]', '"', tmpdat)
+			self.data = tmpdat
 			print(self.data)
 			
 		#Then we create the tokens
