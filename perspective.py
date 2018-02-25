@@ -44,7 +44,7 @@ class Perspective:
 			fusetext = ''.join([x[0] for x in c[1]])
 			elems.append(dict(soort = isi, text = fusetext, tag = 'zin'))
 		
-		filewriter = nwriter.NidhoggWriter('perspectivetest.xml', 'generesult', elems)
+		filewriter = nwriter.NidhoggWriter('perspectivetest.xml', 'generesult', elems, self.myfile.fileinfo)
 		#~ print(filewriter)
 		filewriter.serialize()
 	

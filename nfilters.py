@@ -15,7 +15,7 @@ def filter_no_dialog(text):
 def remove_between_char(text, char1, char2):
 	in_char = False
 	retval = []
-	`
+	
 	for t in text:
 		if t == char1:
 			in_char = True
