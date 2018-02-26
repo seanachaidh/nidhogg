@@ -10,15 +10,20 @@ class TestFileWriter(unittest.TestCase):
 		
 	def test_serialization(self):
 		self._mytree.serialize()
+		
 
 class TestPerspective(unittest.TestCase):
 	@classmethod
 	def setUpClass(cls):
 		cls._testfile = nfile.NidhoggFile('corpus/alice_in_wonderland.txt.bz2')
 		cls._scanner = perspective.Perspective(cls._testfile)
+		cls._template = NidhoggLoader('perspectivetest.xml')
 		
 	def test_perspective(self):
 		self._scanner.get_score()
+
+	def test_transformation(self):
+		pass
 		
 		
 class TestFilters(unittest.TestCase):
