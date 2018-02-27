@@ -17,13 +17,13 @@ class TestPerspective(unittest.TestCase):
 	def setUpClass(cls):
 		cls._testfile = nfile.NidhoggFile('corpus/alice_in_wonderland.txt.bz2')
 		cls._scanner = perspective.Perspective(cls._testfile)
-		cls._template = NidhoggLoader('perspectivetest.xml')
+		cls._template = nwriter.NidhoggLoader('perspectivetest.xml')
 		
 	def test_perspective(self):
 		self._scanner.get_score()
 
 	def test_transformation(self):
-		pass
+		self._template.transform('transform/perspective.xslt')
 		
 		
 class TestFilters(unittest.TestCase):

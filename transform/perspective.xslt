@@ -10,10 +10,10 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 				<div class="bookcontent">
 					<xsl:for-each select="nidhoggfile/zin">
 						<xsl:choose>
-							<xsl:when test="current()/@soort &eq; ik">
+							<xsl:when test="current()/@soort &#61; ik">
 								<span><xsl:value-of select="current()" /></span>
 							</xsl:when>
-							<xsl:when test="current()/@soort &eq; hij">
+							<xsl:when test="current()/@soort &#61; hij">
 								<span><xsl:value-of select="current()" /></span>
 							</xsl:when>
 							<xsl:otherwise>
