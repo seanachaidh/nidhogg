@@ -11,10 +11,10 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 					<xsl:for-each select="nidhoggfile/zin">
 						<xsl:choose>
 							<xsl:when test="current()/@soort &#61; ik">
-								<span><xsl:value-of select="current()" /></span>
+								<span class="ik"><xsl:value-of select="current()" /></span>
 							</xsl:when>
 							<xsl:when test="current()/@soort &#61; hij">
-								<span><xsl:value-of select="current()" /></span>
+								<span class="hij"><xsl:value-of select="current()" /></span>
 							</xsl:when>
 							<xsl:otherwise>
 								<span><xsl:value-of select="current()" /></span>
@@ -22,9 +22,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 						</xsl:choose>
 					</xsl:for-each>
 				</div>
-				
 			</body>
 		</html>
 	</xsl:template>
-
 </xsl:stylesheet>

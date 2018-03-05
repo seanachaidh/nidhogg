@@ -42,7 +42,7 @@ class NidhoggLoader:
 	
 	def transform(self, transfile):
 		trans_file = LET.parse(transfile)
-		trans = LET.XSLT(transfile)
+		trans = LET.XSLT(trans_file)
 		newdom = trans(self.dom)
 		
 		#voorlopig printen we gewoon
