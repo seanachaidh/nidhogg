@@ -2,6 +2,12 @@
 
 from SPARQLWrapper import SPARQLWrapper, JSON
 
+
+class LibraryThing:
+	def __init__(self, devkey):
+		pass
+
+
 class DBPedia:
 	def __init__(self):
 		pass
