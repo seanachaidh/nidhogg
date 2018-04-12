@@ -1,4 +1,4 @@
-import unittest, nwriter, nfile, perspective, nfilters
+import unittest, nwriter, nfile, perspective, nfilters, dbpedia, nidhogg
 
 class TestFileWriter(unittest.TestCase):
 	@classmethod
@@ -33,6 +33,18 @@ class TestFilters(unittest.TestCase):
 		newzin = nfilters.filter_spaces(zin)
 		self.assertEqual(newzin, 'Hello cruel world')
 
+
+class TestRequests(unittest.TestCase):
+	
+	def test_librarything(self):
+		# for tests we use the default configuration file location
+		conffile = nidhogg.ConfigFile('settings.json')
+		librarykey = conffile.search_key('librarything')['key']
+		
+		api = dbpedia.LibraryThing(librarykey, True)
+		
+		api.get_work(name = "Harry Potter and the Philosopher's Stone")
+		
 
 if __name__ == '__main__':
 	unittest.main()
