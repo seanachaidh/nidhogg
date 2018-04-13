@@ -5,7 +5,6 @@
 class Sentiment:
 	
 	def _calculate_stats(self, scores, col):
-		lentot = len(scores)
 		
 		sumpos = 0
 		countneg = 0
@@ -32,7 +31,7 @@ class Sentiment:
 	
 	
 	def _mark_words(self):
-		retval[]
+		retval = []
 		for chunk in self.story:
 			scores = []
 			for token in chunk:
@@ -57,6 +56,25 @@ class Sentiment:
 						actual_name = n.split('#')[0]
 						retval[actual_name] = (pos_score, neg_score, obj_score)
 		return retval
-						
-	def __init__(story, lexicon):
-		pass
+	# Hiervan moet ik een abstracte methode maken!
+	def get_statistics(self):
+		retval = dict()
+		
+#		totalwords = self.stats[1] + self.stats[3] + self.stats[5]
+		
+		retval['Positive sum'] = self.stats[0]
+		retval['Positive count'] = self.stats[1]
+		retval['Postive mean'] = self.stats[0] / self.stats[1]
+		retval['Negative sum'] = self.stats[2]
+		retval['Negative count'] = self.stats[3]
+		retval['Negative mean'] = self.stats[2] / self.stats[3]
+		
+		return retval
+		
+		
+	def __init__(self, story, lexicon):
+		self.lexicon = lexicon
+		self.parsed_lexicon = self._parse_lexicon()
+		self.marked_words = self._mark_words()
+		self.stats = self._calculate_stats()
+		   
