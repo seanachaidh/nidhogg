@@ -57,8 +57,37 @@ class Graph:
 
 
 # FUNCTIES VOOR HET MAKEN VAN BOMEN!
-						
-                        
+def create_split_tree(splits, depth):
+	
+	def create_children(num, splits):
+		splitpercent = 1/splits
+		current = 0
+		retval = []
+		
+		for i in range(splits):
+			current += splitpercent
+			retval.append(GraphNode(current))
+		return retval
+		
+	initnum = 1.0 # Misschien hiejr een parameter van maken?
+	retval = Graph()
+	root = GraphNode(initnum)
+	currentdepth = 1
+	stack = []
+	
+	stack.append(root)
+	retval.add_node(root)
+	
+	while stack:
+		if currentdepth != depth:
+			children = create_children(initnum, splits)
+			initnum = initnum / splits
+			for c in children:
+				stack.append(c)
+		else:
+			
+			
+	 
 class TestTree(unittest.TestCase):
 	
 	def setUp(self):
