@@ -2,6 +2,7 @@ import os
 from xml.etree import ElementTree as ET
 from zipfile import ZipFile
 
+from operator import attrgetter
 
 class structTOC:
     def __init__(self, id, text, content, order):
@@ -10,9 +11,14 @@ class structTOC:
         self.order = order
         self.content = content
 
+
+class MetaData:
+    def __init__(self, filename):
+        pass
+
 class TOC:
     def __init__(self, filename):
-        self.elements = []
+        elements = []
 
         tree = ET.parse(filename)
         root = tree.getroot()
@@ -28,10 +34,14 @@ class TOC:
             content = point.find('./content').attrib.get('src', 'None')
 
             line = structTOC(id, text, content, order)
-            self.elements.append(line)
+            elements.append(line)
+
+            # Is hier het sorteren wel nodig?
+            self.elements = sorted(elements, key = attrgetter('order'))
+
 
 class EPUB:
-    def __init__(self, author, title):
+    def __init__(self, author, title, chapters):
         pass
     
     @staticmethod
@@ -42,5 +52,11 @@ class EPUB:
         zipf = ZipFile(filename)
         zipf.extractall(foldername)
 
+        metainf = ET.parse(os.path.join(foldername, 'META-INF', 'container.xml')).getroot()
+        locfolder =  metainf.find('.//rootfile').attrib.get('full-path')
 
-    
+        toc = TOC(os.path.join(foldername, locfolder, 'toc.ncx'))
+
+
+
+
