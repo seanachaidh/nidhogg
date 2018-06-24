@@ -30,15 +30,15 @@ class Application:
 	
 	def __init__(self, parameters):
 		
-		self.parameters = paramters
+		self.parameters = parameters
 		self.books = list()
 
 	def parse_parameters(self):
-		for i in range(len(parameters)):
+		for i in range(len(self.parameters)):
 			current = self.parameters[i]
 			
 			if current == "--bookdir":
-				self.bookdir = self.paramters[i+1]
+				self.bookdir = self.parameters[i+1]
 				i = i + 1
 			if current == '--algtype':
 				self.algtype = self.parameters[i+1]
